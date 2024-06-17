@@ -106,7 +106,7 @@ export class AuthService {
 
     const resetToken = uuid();
     const expiryDate = new Date();
-    expiryDate.setDate(expiryDate.getMinutes() + 5);
+    expiryDate.setMinutes(expiryDate.getMinutes() + 5 );
 
     try {
       const resetTokenFind = await this.resetTokenModel.findOneAndUpdate(
@@ -209,6 +209,24 @@ export class AuthService {
       };
     } catch (e) {
       throw new BadRequestException();
+    }
+  }
+
+  async resetPassword(newPassword : string , resetToken : string){
+    const token = await this.resetTokenModel.findOne({resetToken , expiryDate : {$gte : new Date()}});
+    if(!token) throw new UnauthorizedException('Invalid token.');
+
+    const user = await this.userModel.findById(token.userId);
+    if(!user) throw new NotFoundException('User not found.');
+
+    const hashedNewPassword = await bcrypt.hash(newPassword , 10);
+    user.password = hashedNewPassword;
+    await user.save()
+    await token.deleteOne()
+
+    return {
+      message : 'Password has changed successfully.',
+      statusCode : HttpStatus.OK
     }
   }
 }
