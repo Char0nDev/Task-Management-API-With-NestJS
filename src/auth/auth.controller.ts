@@ -7,25 +7,31 @@ import { ResetPasswordDto } from './dtos/reset-password.dto';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private readonly authService : AuthService){}
-    @Post('register')
-    async register(@Body() registerData  : registerDto) {
-        return this.authService.register(registerData)
-    };
+  constructor(private readonly authService: AuthService) {}
+  @Post('register')
+  async register(@Body() registerData: registerDto) {
+    return this.authService.register(registerData);
+  }
 
-    @Post('login')
-    async login(@Body() loginData : LoginDto) {
-       const {email , password} = loginData;
-       return this.authService.login(email , password)
-    }
+  @Post('login')
+  async login(@Body() loginData: LoginDto) {
+    const { email, password } = loginData;
+    return this.authService.login(email, password);
+  }
 
-    @Post('forgot-password')
-    async forgotPassword(@Body() forgotPasswordData : ForgotPasswordDto){
-        return this.authService.forgotPassword(forgotPasswordData.email)
-    }
+  @Post('forgot-password')
+  async forgotPassword(@Body() forgotPasswordData: ForgotPasswordDto) {
+    return this.authService.forgotPassword(forgotPasswordData.email);
+  }
 
-    @Post('reset-password')
-    async resetPassword(@Body() resetPassword : ResetPasswordDto , @Query('token') resetToken : string){
-        return this.authService.resetPassword(resetPassword.newPassword , resetToken) 
-    }
+  @Post('reset-password')
+  async resetPassword(
+    @Body() resetPassword: ResetPasswordDto,
+    @Query('token') resetToken: string,
+  ) {
+    return this.authService.resetPassword(
+      resetPassword.newPassword,
+      resetToken,
+    );
+  }
 }

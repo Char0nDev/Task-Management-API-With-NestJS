@@ -1,19 +1,19 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { IsDate, IsString } from "class-validator";
-import { Document, Types } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { IsDate, IsString } from 'class-validator';
+import { Document, Types } from 'mongoose';
 
-@Schema({versionKey : false , timestamps : true , validateBeforeSave : true})
+@Schema({ versionKey: false, timestamps: true, validateBeforeSave: true })
 export class RefreshToken extends Document {
-    @Prop()
-    @IsString()
-    token : string
+  @Prop()
+  @IsString()
+  token: string;
 
-    @Prop()
-    userId : Types.ObjectId
+  @Prop()
+  userId: Types.ObjectId;
 
-    @Prop()
-    @IsDate()
-    expiryDate : Date
+  @Prop()
+  @IsDate()
+  expiryDate: Date;
 }
 
-export const RefreshTokenSchema = SchemaFactory.createForClass(RefreshToken)
+export const RefreshTokenSchema = SchemaFactory.createForClass(RefreshToken);

@@ -2,10 +2,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { IsEmail, IsNotEmpty, IsStrongPassword, Length } from 'class-validator';
 import { Document } from 'mongoose';
 
-@Schema({ 
-    versionKey: false, 
-    timestamps: true ,
-    validateBeforeSave : true,
+@Schema({
+  versionKey: false,
+  timestamps: true,
+  validateBeforeSave: true,
 })
 export class User extends Document {
   @Prop({ required: true })

@@ -7,11 +7,7 @@ import {
   RefreshToken,
   RefreshTokenSchema,
 } from './schema/refresh-token.schema';
-import {
-  ResetToken,
-  ResetTokenSchema
-} from './schema/reset-password.schema';
-
+import { ResetToken, ResetTokenSchema } from './schema/reset-password.schema';
 
 @Module({
   imports: [
@@ -19,7 +15,7 @@ import {
       { name: User.name, schema: UserSchema },
       { name: RefreshToken.name, schema: RefreshTokenSchema },
       { name: ResetToken.name, schema: ResetTokenSchema },
-    ])
+    ]),
   ],
   providers: [AuthService],
   controllers: [AuthController],
