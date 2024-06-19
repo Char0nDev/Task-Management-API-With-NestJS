@@ -17,7 +17,9 @@ import { Types } from 'mongoose';
 import { title } from 'process';
 import { StringPipe } from './pipes/string.pipe';
 import { UpdateTaskDto } from './dtos/updateTask.dto';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('tasks')
 @UseGuards(AuthGuard)
 @Controller('tasks')
 export class TasksController {
